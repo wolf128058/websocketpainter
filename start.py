@@ -25,6 +25,7 @@ parser.add_argument('-r', '--random', default=False, help=r'Fill the image by pi
 parser.add_argument('-a', '--allrandom', default=False, help=r'Fill the image by pixels of 64 random colors')
 parser.add_argument('-x', '--hex', default=None, help=r'fill the complete area by a certain color given by rgbhex')
 parser.add_argument('-e', '--stripes', default=None, help=r'fill the complete area by stripes')
+parser.add_argument('-f', '--chess', default=None, help=r'fill the complete area by chessboard-pattern')
 parser.add_argument('-l', '--listen', default=False, help=r'stay in listening-mode after call')
 args = parser.parse_args()
 # print(args)
@@ -123,6 +124,22 @@ def fill_random_stripes(client):
                 send_col(mykoord[0], mykoord[1], color2[0], color2[1], color2[2], client)
         time.sleep(args.sleep)
 
+def fill_random_chess(client):
+    color1 = [random.randrange(255)+1, random.randrange(255)+1, random.randrange(255)+1]
+    color2 = [random.randrange(255)+1, random.randrange(255)+1, random.randrange(255)+1]
+    arr = []
+    for x in range(8):
+        for y in range(8):
+            koord = [x, y]
+            arr.append(koord)
+    random.shuffle(arr)
+    for mykoord in arr:
+        if (mykoord[0]%2 == 0 and mykoord[1]%2 == 1) or (mykoord[0]%2 == 1 and mykoord[1]%2 == 0):
+            send_col(mykoord[0], mykoord[1], color1[0], color1[1], color1[2], client)
+        else:
+            send_col(mykoord[0], mykoord[1], color2[0], color2[1], color2[2], client)
+        time.sleep(args.sleep)
+
 client = mqtt.Client(transport=args.transport)
 client.tls_set_context(context=None)
 client.ws_set_options(path=args.mqttpath, headers=None)
@@ -146,6 +163,9 @@ if args.hex is not None:
 
 if args.stripes:
     fill_random_stripes(client)
+
+if args.chess:
+    fill_random_chess(client)
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
