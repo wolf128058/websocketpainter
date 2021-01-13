@@ -73,6 +73,8 @@ def sortdirection(direction):
             6, 14, 22, 30, 38, 46, 54, 62,
             63, 55, 47, 39, 31, 23, 15, 7]
         arr = [arr[i] for i in idx]
+        if random.randrange(0, 9, 1)%2 == 0:
+            arr.reverse()
     elif direction == 'l2r':
         idx = [0, 8, 16, 24, 32, 40, 48, 56,
                1, 9, 17, 25, 33, 41, 49, 57,
@@ -83,6 +85,8 @@ def sortdirection(direction):
                6, 14, 22, 30, 38, 46, 54, 62,
                7, 15, 23, 31, 39, 47, 55, 63]
         arr = [arr[i] for i in idx]
+        if random.randrange(0, 9, 1)%2 == 0:
+            arr.reverse()
     elif direction == 'vsnake':
         idx = [0, 1, 2, 3, 4, 5, 6, 7,
                15, 14, 13, 12, 11, 10, 9, 8,
@@ -93,6 +97,8 @@ def sortdirection(direction):
                48, 49, 50, 51, 52, 53, 54, 55,
                63, 62, 61, 60, 59, 58, 57, 56]
         arr = [arr[i] for i in idx]
+        if random.randrange(0, 9, 1)%2 == 0:
+            arr.reverse()
     elif direction == 'clockwise':
         idx = [0, 1, 2, 3, 4, 5, 6, 7,
                15, 23, 31, 39, 47, 55, 63,
@@ -104,6 +110,8 @@ def sortdirection(direction):
                20, 21, 29, 37, 45, 44, 43,
                42, 34, 26, 27, 28, 36, 35]        
         arr = [arr[i] for i in idx]
+        if random.randrange(0, 9, 1)%2 == 0:
+            arr.reverse()
     elif direction != 'down':
         random.shuffle(arr)
     return arr
