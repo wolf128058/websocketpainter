@@ -145,7 +145,7 @@ def fill_random_complete(client, direction):
 
 def fill_random_stripes(client, direction):
     color1 = [random.randrange(255)+1, random.randrange(255)+1, random.randrange(255)+1]
-    color2 = [random.randrange(255)+1, random.randrange(255)+1, random.randrange(255)+1]
+    color2 = [255 - color1[0], 255 - color1[1], 255 - color1[2]]
     direction = random.randrange(1)
     arr = sortdirection(direction)
     for mykoord in arr:
@@ -162,8 +162,8 @@ def fill_random_stripes(client, direction):
         time.sleep(args.sleep)
 
 def fill_random_chess(client, direction):
-    color1 = [random.randrange(255)+1, random.randrange(255)+1, random.randrange(255)+1]
-    color2 = [random.randrange(255)+1, random.randrange(255)+1, random.randrange(255)+1]
+    color1 = [random.randrange(255), random.randrange(255), random.randrange(255)]
+    color2 = [255 - color1[0], 255 - color1[1], 255 - color1[2]]
     arr = sortdirection(direction)
     for mykoord in arr:
         if (mykoord[0]%2 == 0 and mykoord[1]%2 == 1) or (mykoord[0]%2 == 1 and mykoord[1]%2 == 0):
